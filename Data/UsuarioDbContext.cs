@@ -6,10 +6,10 @@ namespace UsuariosApi.Data;
 
 public class UsuarioDbContext : IdentityDbContext<Usuario>
 {
-  public UsuarioDbContext(DbContextOptions<UsuarioDbContext> options) : base() { }
+  public UsuarioDbContext(DbContextOptions<UsuarioDbContext> options) : base(options) { }
 
-  protected override void OnModelCreating(ModelBuilder modelBuilder)
+  protected override void OnModelCreating(ModelBuilder builder)
   {
-    
+    base.OnModelCreating(builder);
   }
 }

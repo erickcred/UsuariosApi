@@ -17,7 +17,6 @@ public class TokenService
       new Claim("id", usuario.Id),
       new Claim(ClaimTypes.DateOfBirth, usuario.DataNascimento.ToString()),
       new Claim(ClaimTypes.Name, usuario.UserName),
-      //new Claim(ClaimTypes.Email, usuario.Email),
     };
 
     var chave = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("@#$@#fdsasd{}__+211_*&¨sfddfsdfsdfsdds<>Ddsdfdsdf"));

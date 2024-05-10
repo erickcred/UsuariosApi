@@ -40,6 +40,9 @@ public class UsuarioService
     if (!resultado.Succeeded)
       throw new ApplicationException("Usuário não autenticado!");
 
-    return _tokenService.GenerateToken(_autoMapper.Map<Usuario>(dtoLogin));
+    var usuario = _sigInManager.UserManager.Users.FirstOrDefault(user => user.NormalizedUserName == dtoLogin.UserName.ToUpper());
+
+    var token = _tokenService.GenerateToken(usuario);
+    return token;
   }
 }

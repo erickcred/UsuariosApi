@@ -15,7 +15,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<UsuarioDbContext>(options =>
 {
-  options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+  var connectionString = builder.Configuration["ConnectionStrings:DefaultConnection"];
+  options.UseSqlServer(connectionString);
 });
 // Configuração do Identity 
 builder.Services // https://learn.microsoft.com/pt-br/aspnet/core/security/authentication/identity-configuration?view=aspnetcore-7.0#password
@@ -34,7 +35,7 @@ builder.Services.AddAuthentication(options =>
   options.TokenValidationParameters = new TokenValidationParameters
   {
     ValidateIssuerSigningKey = true, // validação da chave gerada para o Token
-    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("@#$@#fdsasd{}__+211_*&¨sfddfsdfsdfsdds<>Ddsdfdsdf")),
+    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["SymmetricSecurityKey"])),
     ValidateAudience = false,
     ValidateIssuer = false,
     ClockSkew = TimeSpan.Zero // ele faz o get ou set do relógio para validação de tempo
